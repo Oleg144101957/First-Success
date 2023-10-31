@@ -4,6 +4,19 @@ plugins {
 }
 
 android {
+
+    signingConfigs {
+        create("release") {
+            if (project.hasProperty("MYAPP_RELEASE_STORE_FILE")) {
+                storeFile = file(project.findProperty("MYAPP_RELEASE_STORE_FILE"))
+                storePassword = project.findProperty("MYAPP_RELEASE_STORE_PASSWORD") as String
+                keyAlias = project.findProperty("MYAPP_RELEASE_KEY_ALIAS") as String
+                keyPassword = project.findProperty("MYAPP_RELEASE_KEY_PASSWORD") as String
+            }
+        }
+    }
+
+
     namespace = "ua.playappsuccess.first"
     compileSdk = 34
 
@@ -34,7 +47,7 @@ android {
         jvmTarget = "1.8"
     }
 
-    viewBinding { 
+    viewBinding {
         enable = true
     }
 }
